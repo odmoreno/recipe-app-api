@@ -3,7 +3,13 @@ docker-compose.exe run --rm app sh -c "flake8"
 Crear proyecto en la carpeta app
 docker-compose.exe run --rm app sh -c "django-admin startproject app ."
 
+
 Create a github actions config
   docker login: https://github.com/marketplace/actions/docker-login
   Checkout V4: https://github.com/marketplace/actions/checkout
   Marketplace: https://github.com/marketplace?type=actions
+
+
+manage tests
+
+docker-compose run app sh -c "python manage.py test"
