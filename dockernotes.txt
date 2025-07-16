@@ -1,0 +1,4 @@
+docker-compose.exe run --rm app sh -c "flake8" 
+
+Crear proyecto en la carpeta app
+docker-compose.exe run --rm app sh -c "django-admin startproject app ."
