@@ -1,7 +1,12 @@
+up docker:
+  docker-compose down
+  docker-compose build
+  docker-compose up -d
+
 docker-compose.exe run --rm app sh -c "flake8" 
 
 Crear proyecto en la carpeta app
-docker-compose.exe run --rm app sh -c "django-admin startproject app ."
+  docker-compose.exe run --rm app sh -c "django-admin startproject app ."
 
 
 Create a github actions config
@@ -12,4 +17,4 @@ Create a github actions config
 
 manage tests
 
-docker-compose run app sh -c "python manage.py test"
+  docker-compose run app sh -c "python manage.py test"
