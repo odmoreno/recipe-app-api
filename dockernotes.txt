@@ -19,5 +19,8 @@ manage tests
 
   docker-compose run app sh -c "python manage.py test"
 
+manage commands
+  docker-compose run --rm app sh -c "python manage.py wait_for_db && flake8"
+
 
   # noqa "No Quality Assurance"  “no revises calidad en esta línea” ❌ No aplicar reglas de lint (análisis estático) de Flake8 en esta línea.
