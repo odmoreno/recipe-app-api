@@ -18,3 +18,6 @@ Create a github actions config
 manage tests
 
   docker-compose run app sh -c "python manage.py test"
+
+
+  # noqa "No Quality Assurance"  “no revises calidad en esta línea” ❌ No aplicar reglas de lint (análisis estático) de Flake8 en esta línea.
