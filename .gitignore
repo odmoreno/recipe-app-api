@@ -1,6 +1,9 @@
 /.vscode
-/app/app/__pycache__
 /app/db.sqlite3
-/app/app/__pycache__/urls.cpython-39.pyc
-/app/core/__pycache__
-/app/core/management/__pycache__
+
+# Python Cache
+app/__pycache__/
+app/*/__pycache__/
+app/*/*/__pycache__/
+app/*/*/*/__pycache__/
+app/*/*/*/*/*/*/__pycache__/
