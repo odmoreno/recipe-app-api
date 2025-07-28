@@ -8,6 +8,9 @@ docker-compose.exe run --rm app sh -c "flake8"
 Crear proyecto en la carpeta app
   docker-compose.exe run --rm app sh -c "django-admin startproject app ."
 
+crear application folder en el proyecto
+  docker-compose.exe run --rm app sh -c "python manage.py startapp user"
+
 Hacer migraciones
   docker-compose.exe run --rm app sh -c "python manage.py wait_for_db && python manage.py make-migrations"
 
@@ -22,14 +25,13 @@ Create a github actions config
 
 
 manage tests
-
   docker-compose run app sh -c "python manage.py test"
 
 manage commands
   docker-compose run --rm app sh -c "python manage.py wait_for_db && flake8"
 
 
-  # noqa "No Quality Assurance"  “no revises calidad en esta línea” ❌ No aplicar reglas de lint (análisis estático) de Flake8 en esta línea.
+# noqa "No Quality Assurance"  “no revises calidad en esta línea” ❌ No aplicar reglas de lint (análisis estático) de Flake8 en esta línea.
 
 
 revisar volumenes y eliminar (sensible a los espacios)
