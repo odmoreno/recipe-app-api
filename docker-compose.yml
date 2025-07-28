@@ -3,7 +3,7 @@ services:
   app:
     build:
       context: .
-      args: 
+      args:
         - DEV=true
     ports:
       - "8002:8002"
