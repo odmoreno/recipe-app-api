@@ -43,3 +43,8 @@ recipe-app-api_dev-db-data
 
 create superuser
   docker-compose.exe run --rm app sh -c "python manage.py createsuperuser"
+
+
+docker-compose run --service-ports -e DJANGO_SETTINGS_MODULE=app.settings app sh -c `
+>> "python -m debugpy --listen 0.0.0.0:5679 --wait-for-client -m django test recipe.tests.test_recipe_api"
+>>

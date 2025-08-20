@@ -1,6 +1,11 @@
 """
-Tests for recipe APIS.
+Tests for recipe APIs.
 """
+
+import debugpy
+debugpy.breakpoint()
+
+print("FILE:", __file__)
 
 from decimal import Decimal
 
