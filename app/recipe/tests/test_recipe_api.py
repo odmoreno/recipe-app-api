@@ -2,10 +2,10 @@
 Tests for recipe APIs.
 """
 
-import debugpy
-debugpy.breakpoint()
-
-print("FILE:", __file__)
+from recipe.serializers import (
+    RecipeSerializer,
+    RecipeDetailSerializer
+)
 
 from decimal import Decimal
 
@@ -18,9 +18,13 @@ from rest_framework.test import APIClient
 
 from core.models import Recipe
 
-from recipe.serializers import RecipeSerializer
 
 RECIPES_URL = reverse('recipe:recipe-list')
+
+
+def detail_url(recipe_id):
+    """Create and return a recipe detail URL."""
+    return reverse('recipe:recipe-detail', args=[recipe_id])
 
 
 def create_recipe(user, **params):
@@ -89,3 +93,32 @@ class PrivateRecipeApiTests(TestCase):
         serializer = RecipeSerializer(recipes, many=True)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
+
+    def test_get_recipe_detail(self):
+        """Test get recipe detail."""
+        recipe = create_recipe(user=self.user)
+
+        url = detail_url(recipe.id)
+        res = self.client.get(url)
+
+        serializer = RecipeDetailSerializer(recipe)
+        self.assertEqual(res.data, serializer.data)
+
+    def test_create_recipe(self):
+        """Test creating a recipe."""
+        payload = {
+            'title': 'Sample recipe',
+            'time_minutes': 30,
+            'price': Decimal('5.99'),
+        }
+        res = self.client.post(RECIPES_URL, payload)
+        # 1. Verificar que la API devuelve 201
+        self.assertEqual(res.status_code, status.HTTP_201_CREATED)
+        # 2. Recuperar receta creada desde la BD
+        recipe = Recipe.objects.get(id=res.data['id'])
+        # 3. Verificar que cada valor coincida con el payload
+        for k, v in payload.items():
+            self.assertEqual(getattr(recipe, k), v)
+
+        # 4. Verificar que se asoció al usuario autenticado
+        self.assertEqual(recipe.user, self.user)
